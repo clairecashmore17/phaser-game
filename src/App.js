@@ -1,49 +1,57 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Phaser, { Game } from "phaser";
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import MainScene from "./scenes/MainScene";
+
+function usePhaserGame(config) {
+  const phaserGameRef = useRef(null);
+  useEffect(
+    () => {
+      if (phaserGameRef.current) {
+        return;
+      }
+      phaserGameRef.current = new Game(config);
+      return () => {
+        phaserGameRef.current.destroy(true);
+        phaserGameRef.current = null;
+      };
+    },
+    [] /* only run once; config ref elided on purpose */
+  );
+  return phaserGameRef.current;
+}
+
+const config = {
+  width: 512,
+  height: 412,
+  backgroundColor: "#333333",
+  type: Phaser.AUTO,
+  parent: "survival-game",
+  scene: [MainScene],
+  scale: {
+    zoom: 2,
+  },
+  physics: {
+    default: "matter",
+    matter: {
+      debug: true,
+      gravity: { y: 0 },
+    },
+  },
+  plugins: {
+    scene: [
+      {
+        plugin: PhaserMatterCollisionPlugin,
+        key: "matterCollision",
+        mapping: "matterCollision",
+      },
+    ],
+  },
+};
 
 function App() {
-  const [game, setGame] = useState(null);
-  // Creating game inside a useEffect in order to ensure 1 instance is created
-  useEffect(() => {
-    console.log("Going into useEffect");
-    console.log(game);
-    if (game) {
-      console.log("game detected. stop creation");
-      return;
-    }
-    const phaserGame = new Phaser.Game({
-      width: 512,
-      height: 412,
-      backgroundColor: "#333333",
-      type: Phaser.AUTO,
-      parent: "survival-game",
-      scene: [],
-      scale: {
-        zoom: 2,
-      },
-      physics: {
-        default: "matter",
-        matter: {
-          debug: true,
-          gravity: { y: 0 },
-        },
-      },
-      plugins: {
-        scene: [
-          {
-            plugin: PhaserMatterCollisionPlugin,
-            key: "matterCollision",
-            mapping: "matterCollision",
-          },
-        ],
-      },
-    });
-
-    setGame(phaserGame);
-  }, [game]);
+  const game = usePhaserGame(config);
 }
 
 export default App;
