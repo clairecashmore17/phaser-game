@@ -39,7 +39,7 @@ export default class MainScene extends Phaser.Scene {
     }
     //scale our vector(multiplying unit vector by speed)
     playerVelocity.scale(speed);
-    //actually move playert
+    //actually move player
     this.player.setVelocity(playerVelocity.x, playerVelocity.y);
   }
 }
