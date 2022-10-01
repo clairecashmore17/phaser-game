@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import bear from "../assets/atlases/bear_atlas.json";
+import female from "../assets/atlases/female_atlas.json";
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
@@ -9,12 +11,22 @@ export default class MainScene extends Phaser.Scene {
   //this is where we load all our images
   preload() {
     console.log("preload");
+    //loading our images
+    this.load.atlas("bear", "../assets/atlases/bear.png", bear);
+    this.load.animation("bear_anim", "../assets/atlases/bear_anim.json");
   }
   //create our game objects
   create() {
     console.log("created");
     //creating new physics sprite
-    this.player = new Phaser.Physics.Matter.Sprite(this.matter.world);
+    this.player = new Phaser.Physics.Matter.Sprite(
+      this.matter.world,
+      0,
+      0,
+      "bear",
+      "bear_idle_1"
+    );
+    this.add.existing(this.player);
     this.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -24,7 +36,7 @@ export default class MainScene extends Phaser.Scene {
   }
   //called 60 fps
   update() {
-    // console.log("update");
+    this.player.anims.play("bear_idle", true);
     const speed = 2.5;
     //create velocity vector for player
     let playerVelocity = new Phaser.Math.Vector2();
