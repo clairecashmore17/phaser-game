@@ -37,6 +37,8 @@ export default class MainScene extends Phaser.Scene {
     } else if (this.inputKeys.down.isDown) {
       playerVelocity.y = 1;
     }
+    //make sure magnitude is always 1 to avoid diagnol speed
+    playerVelocity.normalize();
     //scale our vector(multiplying unit vector by speed)
     playerVelocity.scale(speed);
     //actually move player
