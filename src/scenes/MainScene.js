@@ -21,12 +21,15 @@ export default class MainScene extends Phaser.Scene {
     const tileset = map.addTilesetImage("IceTileset", "tiles", 32, 32);
     const layer1 = map.createLayer("Tile Layer 1", tileset, 0, 0);
     const layer2 = map.createLayer("Tile Layer 2", tileset, 0, 0);
-
+    layer1.setCollisionByProperty({ collides: true });
+    this.matter.world.convertTilemapLayer(layer1);
+    layer2.setCollisionByProperty({ collides: true });
+    this.matter.world.convertTilemapLayer(layer2);
     //creating new physics sprite
     this.player = new Player({
       scene: this,
-      x: 0,
-      y: 0,
+      x: 100,
+      y: 100,
       texture: "bear",
       frame: "bear_idle_1",
     });
