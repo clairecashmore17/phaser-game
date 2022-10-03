@@ -13,6 +13,11 @@ export default class MainScene extends Phaser.Scene {
     Player.preload(this);
     this.load.image("tiles", "../../assets/maps/IceTileset.png");
     this.load.tilemapTiledJSON("map", "assets/maps/snow_map.json");
+    this.load.atlas(
+      "coin",
+      "../../assets/atlases/coin.png",
+      "../../assets/atlases/coin.json"
+    );
   }
   //create our game objects
   create() {
@@ -33,7 +38,14 @@ export default class MainScene extends Phaser.Scene {
       texture: "bear",
       frame: "bear_idle_1",
     });
-
+    this.coin = new Phaser.Physics.Matter.Sprite(
+      this.matter.world,
+      100,
+      100,
+      "coin",
+      "coin"
+    );
+    this.add.existing(this.coin);
     this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
