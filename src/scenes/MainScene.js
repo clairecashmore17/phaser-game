@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-
 import Player from "../components/Player/Player.js";
+
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
@@ -9,6 +9,7 @@ export default class MainScene extends Phaser.Scene {
   //methods to be called
 
   //this is where we load all our images
+  //need to debug the assets
   preload() {
     Player.preload(this);
     this.load.image("tiles", "../../assets/maps/IceTileset.png");

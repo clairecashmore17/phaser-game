@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import bear from "../../assets/atlases/bear_atlas.json";
+
 import female from "../../assets/atlases/female_atlas.json";
 export default class Player extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
@@ -29,8 +30,8 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
   //creating static method for the files
   static preload(scene) {
     //loading our images
-    scene.load.atlas("bear", "../assets/atlases/bear.png", bear);
-    scene.load.animation("bear_anim", "../assets/atlases/bear_anim.json");
+    scene.load.atlas("bear", "../../assets/atlases/bear.png", bear);
+    scene.load.animation("bear_anim", "../../assets/atlases/bear_anim.json");
   }
 
   //grab our player velocity
