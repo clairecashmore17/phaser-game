@@ -1,6 +1,6 @@
 import Phaser from "phaser";
-
 import Player from "../components/Player/Player.js";
+
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
