@@ -1,6 +1,8 @@
-import Phaser from "phaser";
+import Phaser, { GameObjects } from "phaser";
+import NPC from "../components/NPC/NPC.js";
 import Player from "../components/Player/Player.js";
-
+import female from "../assets/atlases/female_atlas.json";
+import { DialogModalPlugin } from "../utils/helpers.js";
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
@@ -39,6 +41,15 @@ export default class MainScene extends Phaser.Scene {
       texture: "bear",
       frame: "bear_idle_1",
     });
+
+    this.npcFemale = new NPC({
+      scene: this,
+      x: 300,
+      y: 300,
+      texture: "bear",
+      frame: "bear_idle_1",
+    });
+
     this.coin = new Phaser.Physics.Matter.Sprite(
       this.matter.world,
       100,
@@ -57,5 +68,6 @@ export default class MainScene extends Phaser.Scene {
 
   update() {
     this.player.update();
+    this.npcFemale.update();
   }
 }

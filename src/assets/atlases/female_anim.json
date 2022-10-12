@@ -1,0 +1,36 @@
+{
+  "anims": [
+    {
+      "key": "female_idle",
+      "type": "frames",
+      "repeat": -1,
+      "frameRate": 12,
+      "frames": [
+        {
+          "key": "female",
+          "frame": "female_idle_1"
+        },
+        {
+          "key": "female",
+          "frame": "female_idle_2"
+        },
+        {
+          "key": "female",
+          "frame": "female_idle_3"
+        },
+        {
+          "key": "female",
+          "frame": "female_idle_3"
+        },
+        {
+          "key": "female",
+          "frame": "female_idle_2"
+        },
+        {
+          "key": "female",
+          "frame": "female_idle_1"
+        }
+      ]
+    }
+  ]
+}

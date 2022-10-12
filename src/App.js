@@ -3,6 +3,7 @@ import Phaser, { Game } from "phaser";
 import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin";
 import { useCallback, useEffect, useRef } from "react";
 import MainScene from "./scenes/MainScene";
+import { DialogModalPlugin } from "./utils/helpers";
 
 function usePhaserGame(config) {
   const phaserGameRef = useRef(null);
