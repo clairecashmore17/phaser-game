@@ -2,7 +2,7 @@ import Phaser, { GameObjects } from "phaser";
 import NPC from "../components/NPC/NPC.js";
 import Player from "../components/Player/Player.js";
 import female from "../assets/atlases/female_atlas.json";
-import { DialogModalPlugin } from "../utils/helpers.js";
+let clicked = false;
 export default class MainScene extends Phaser.Scene {
   constructor() {
     super("MainScene");
@@ -25,6 +25,7 @@ export default class MainScene extends Phaser.Scene {
   //create our game objects
   create() {
     //map
+
     const map = this.make.tilemap({ key: "map" });
     const tileset = map.addTilesetImage("IceTileset", "tiles", 32, 32);
     const layer1 = map.createLayer("Tile Layer 1", tileset, 0, 0);
@@ -41,6 +42,7 @@ export default class MainScene extends Phaser.Scene {
       texture: "bear",
       frame: "bear_idle_1",
     });
+    // this.add.text(270, 250, "hello", { color: "00ff00" });
 
     this.npcFemale = new NPC({
       scene: this,
@@ -48,6 +50,7 @@ export default class MainScene extends Phaser.Scene {
       y: 300,
       texture: "bear",
       frame: "bear_idle_1",
+      clicked: clicked,
     });
 
     this.coin = new Phaser.Physics.Matter.Sprite(
@@ -57,6 +60,7 @@ export default class MainScene extends Phaser.Scene {
       "coin",
       "coin"
     );
+
     this.add.existing(this.coin);
     this.player.inputKeys = this.input.keyboard.addKeys({
       up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -64,6 +68,7 @@ export default class MainScene extends Phaser.Scene {
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
     });
+    console.log(clicked);
   }
 
   update() {

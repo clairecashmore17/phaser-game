@@ -1,10 +1,9 @@
-import { click } from "@testing-library/user-event/dist/click";
 import Phaser from "phaser";
 import bear from "../../assets/atlases/bear_atlas.json";
-import { createSpeechBubble } from "../../utils/helpers";
+
 export default class NPC extends Phaser.Physics.Matter.Sprite {
   constructor(data) {
-    let { scene, x, y, texture, frame } = data;
+    let { scene, x, y, texture, frame, clicked } = data;
     super(scene.matter.world, x, y, texture, frame);
     this.scene.add.existing(this);
 
@@ -29,19 +28,9 @@ export default class NPC extends Phaser.Physics.Matter.Sprite {
     this.setFixedRotation();
     //make sprite interactive
     this.setInteractive();
-    let clicked = 0;
     this.on("pointerdown", function (pointer) {
-      clicked++;
-      const text = new Phaser.GameObjects.Text(this.scene, 300, 200, "hello", {
-        font: '"Press Start 2P"',
-      });
-      if (clicked == 1) {
-        alert("Hey there!");
-      } else {
-        alert("stop clicking me...");
-      }
-
-      // this.add.text
+      clicked = true;
+      console.log("clicked is " + clicked);
     });
   }
 
